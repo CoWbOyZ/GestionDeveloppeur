@@ -16,7 +16,8 @@ public class DeveloppeurAction extends ActionSupport{
 	private String mail;
 	private String codePostal;
 	private java.util.Date dateInscription;
-	private ArrayList<Developpeur> listDeveloppeurs = new ArrayList<>(10);
+	public static ArrayList<Developpeur> listDeveloppeurs = new ArrayList<Developpeur>();
+	public Developpeur developpeur;
 
 	public int getIdentifiant() {
 		return identifiant;
@@ -59,26 +60,30 @@ public class DeveloppeurAction extends ActionSupport{
 
 	public String enregistrer() {
 		System.out.println("Dans la méthode enregistrer...");
-
-		Developpeur developpeur = new Developpeur ();
+		
+		developpeur = new Developpeur();
 		developpeur.setIdentifiant(identifiant);
 		developpeur.setPseudo(pseudo);
 		developpeur.setMail(mail);
 		developpeur.setCodePostal(codePostal);
 		developpeur.setDateInscription(dateInscription);
 		
-		listDeveloppeurs.add(developpeur);
-		
 		if(this.pseudo.equals("")) {
 			System.out.println("le champ identifiant ne doit pas être vide...");
 			return "input";
-		}
-		System.out.println("Success........."); 
+		}		
+		
+		listDeveloppeurs.add(developpeur);
+		System.out.println( developpeur );
+		System.out.println("Success.........");
 		return "success";
 	}
 
 	public String lister(){
 		System.out.println("dans la méthode lister().....");
+		System.out.println( developpeur );
+		System.out.println( listDeveloppeurs );
+		//developpeur.setIdentifiant( 50 );
 		
 		return "success";
 	}
@@ -87,6 +92,19 @@ public class DeveloppeurAction extends ActionSupport{
 		System.out.println("dans la méthode supprimer().....");
 		//listDeveloppeurs.removeAll(getListDeveloppeurs());
 		return "success";
+	}
+	public ArrayList<Developpeur> getListDeveloppeurs() {
+		return listDeveloppeurs;
+	}
+	public void setListDeveloppeurs(ArrayList<Developpeur> listDeveloppeurs) {
+		DeveloppeurAction.listDeveloppeurs = listDeveloppeurs;
+	}
+
+	public Developpeur getDeveloppeur() {
+		return developpeur;
+	}
+	public void setDeveloppeur(Developpeur developpeur) {
+		this.developpeur = developpeur;
 	}
 
 }
